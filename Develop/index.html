@@ -48,10 +48,10 @@
                 <h4 id= "city-name" class="card-title">Search a City</h4>
                 <div class="card-text">
                   <!-- you don't want to target to p tag as you want the prefix infront e.g "temp:" -->
-                  <p>Temp: <span id="current-day-temp"></span></p>
-                  <p>Wind: <span id="current-day-wind"></span></p>
-                  <p>Humidity <span id="curent-day-humidity"></span></p>
-                  <p>UV Index: <span id="current-day-uv"></span></p>
+                  <p>Temp: <span id="current-temp"></span></p>
+                  <p>Wind: <span id="current-wind"></span></p>
+                  <p>Humidity <span id="current-humidity"></span></p>
+                  <p>UV Index: <span id="current-uv"></span></p>
                 </div>
               </div>
             </div>
@@ -61,20 +61,76 @@
         <div class="row forecast-header">
           <h2>5 Day Forecast:</h2>
         </div>
-        <div class="row forecast-row flex-wrap">
+
+        <div class="row">
+          <div class="col-sm-2">
+            <div class="card">
+              <div class="card-body">
+                <span id= "current-icon"></span>
+                <h5 class="card-title forecast-date">Special title treatment</h5>
+                <p class="card-text">
+                  <p>Temp: <span id="forecast-temp1"></span></p>
+                  <p>Wind: <span id="forecast-wind1"></span></p>
+                  <p>Humidity: <span id="forecast-humidity1"></span></p>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="card">
+              <div class="card-body">
+                <span id= "current-icon"></span>
+                <h5 class="card-title forecast-date">Special title treatment</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title forecastdate">Special title treatment</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+        <!--<div class="row forecast-row flex-wrap">
           <div class="col-2 card">
             <div class="card-body">
               <h6 class="card-title">2022-07-14 icon</h4>
               <div class="card-text">
-                <!-- you don't want to target to p tag as you want the prefix infront e.g "temp:" -->
-                <p>Temp: <span id="current-day-temp"></span></p>
-                <p>Wind: <span id="current-day-wind"></span></p>
-                <p>Humidity <span id="cuurent-day-humidity"></span></p>
-                <p>UV Index: <span id="current-day-uv"></span></p>
+                you don't want to target to p tag as you want the prefix infront e.g "temp:"
+                <p>Temp: <span id="forecast-temp"></span></p>
+                <p>Wind: <span id="forecast-wind"></span></p>
+                <p>Humidity: <span id="forecast-humidity"></span></p>
+                <p>UV Index: <span id="forecast-uv"></span></p>
               </div>
             </div>
           </div>
-       </div>
+       </div>  -->
+       
      
     </section>
   

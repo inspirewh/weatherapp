@@ -26,14 +26,15 @@ function getWeatherData(city){
     return fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`)
     .then(function(response){
         return response.json()
-    
+        
     })
-
+    
     .then(function(currentWeather){
         const cityName = $("#city-name").text(currentWeather.name);
         const datetime = moment(currentWeather.dt, 'X').format("DD-MM-YYYY");
         console.log(datetime);
         cityName.append(currentDayCity, " ", datetime);
+        //store the city name - into local storage
         localStorage.setItem("City Name", currentWeather.name);
         
         //console.log("City Name" + currentWeather.name)
@@ -58,29 +59,53 @@ searchForm.addEventListener('submit', function(event){
     getWeatherData(userInput)
     .then(function(weatherData){
         console.log(weatherData);
-
+        
         const weatherIcon = $("<img>");
         weatherIcon.attr("src", "https://openweathermap.org/img/w/" + weatherData.current.weather[0].icon + ".png" 
         );
+        //once we have the data
+        //populate the data into the DOM
+        //current card: city name, date icon
         $("#current-icon").empty();
         $("#current-icon").append(weatherIcon);
+
+        $("#current-temp").text(weatherData.current.temp + "F");
+        $("#current-wind").text(weatherData.current.wind_speed + " km/h");
+        $("#current-humidity").text(weatherData.current.humidity + "%");
+        $("#current-uv").text(weatherData.current.uvi);
+
+        //show weather per day - 5 day forecast for the search city
+        //loop through the daily response array
+
+        const daily = weatherData.daily;
+
+        for (i = 0; i < 5; i++) {
+            const dailyDate = moment.unix(daily[i].dt).format("DD/MM/YYYY");
+            const dailyTemp = daily[i].temp.day;
+            const dailyHum = daily[i].humidity;
+            const dailyIcon = daily[i].weather[0].icon;
+            const dailyWind = daily[i].wind_speed;
+
+            //$("#forecast-date").text(dailyDate);
+
+            //const forecastDate = $('<h5 class="card-title forecast-date">')
+            $(".forecast-date").text(dailyDate);
+
+            
+
+        }
 
 
         
     })
     
-    //once we have the data
-    //populate the data into the DOM
 
 
 
-    //current card: city name, date icon
 
-
-
-    //store the city name - into local storage
     //render the hiostory into the search list
 
 })
+
 
 
