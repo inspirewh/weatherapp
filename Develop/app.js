@@ -60,9 +60,9 @@ searchForm.addEventListener('submit', function(event){
         console.log(weatherData);
 
         const weatherIcon = $("<img>")
-        weatherIcon.attr("src", "https://openweathermap.org/img/w" + weatherData.current.weather[0].icon + ".png" 
+        weatherIcon.attr("src", "https://openweathermap.org/img/w/" + weatherData.current.weather[0].icon + ".png" 
         );
-        $("#current-icon").empty();
+        //$("#current-icon").empty();
         $("#current-icon").append(weatherIcon);
 
 
