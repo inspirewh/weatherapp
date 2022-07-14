@@ -62,7 +62,7 @@ searchForm.addEventListener('submit', function(event){
         const weatherIcon = $("<img>");
         weatherIcon.attr("src", "https://openweathermap.org/img/w/" + weatherData.current.weather[0].icon + ".png" 
         );
-        //$("#current-icon").empty();
+        $("#current-icon").empty();
         $("#current-icon").append(weatherIcon);
 
 
