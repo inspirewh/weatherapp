@@ -79,17 +79,32 @@ searchForm.addEventListener('submit', function(event){
 
         const daily = weatherData.daily;
 
-        for (i = 0; i < 5; i++) {
+        for (i = 1; i < 6; i++) {
             const dailyDate = moment.unix(daily[i].dt).format("DD/MM/YYYY");
             const dailyTemp = daily[i].temp.day;
             const dailyHum = daily[i].humidity;
             const dailyIcon = daily[i].weather[0].icon;
             const dailyWind = daily[i].wind_speed;
 
+            console.log(dailyDate);
+
+            //creates dynamic elements
+            $("forecast-date1").text(dailyDate[1]);
+
+
+            //adds text to dynamic elements
+           //dateTag.text(dailyDate);
+
+
+
+
             //$("#forecast-date").text(dailyDate);
 
             //const forecastDate = $('<h5 class="card-title forecast-date">')
-            $(".forecast-date").text(dailyDate);
+           //$("#current-temp").text(weatherData.current.temp + "F");
+
+                
+            //})
 
             
 
