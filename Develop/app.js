@@ -33,7 +33,10 @@ function getWeatherData(city){
         const cityName = $("#city-name").text(currentWeather.name);
         const datetime = moment(currentWeather.dt, 'X').format("DD-MM-YYYY");
         console.log(datetime);
-        cityName.append(currentDayCity, " ", datetime);
+        const weatherIcon = $("<img>");
+        weatherIcon.attr("src", "https://openweathermap.org/img/w/" + currentWeather.weather[0].icon + ".png" 
+        );
+        cityName.append(currentDayCity, " ", datetime, weatherIcon);
         //store the city name - into local storage
         localStorage.setItem("City Name", currentWeather.name);
         
@@ -60,36 +63,56 @@ searchForm.addEventListener('submit', function(event){
     .then(function(weatherData){
         console.log(weatherData);
         
-        const weatherIcon = $("<img>");
-        weatherIcon.attr("src", "https://openweathermap.org/img/w/" + weatherData.current.weather[0].icon + ".png" 
-        );
+        //const weatherIcon = $("<img>");
+        //weatherIcon.attr("src", "https://openweathermap.org/img/w/" + weatherData.current.weather[0].icon + ".png" 
+        //);
         //once we have the data
         //populate the data into the DOM
         //current card: city name, date icon
         $("#current-icon").empty();
-        $("#current-icon").append(weatherIcon);
+        //$("#current-icon").append(weatherIcon);
 
         $("#current-temp").text(weatherData.current.temp + "F");
-        $("#current-wind").text(weatherData.current.wind_speed + " km/h");
         $("#current-humidity").text(weatherData.current.humidity + "%");
+        $("#current-wind").text(weatherData.current.wind_speed + " km/h");
         $("#current-uv").text(weatherData.current.uvi);
 
         //show weather per day - 5 day forecast for the search city
         //loop through the daily response array
 
         const daily = weatherData.daily;
+        console.log(daily);
+        $("#weather-cards").empty();
 
         for (i = 1; i < 6; i++) {
+            const forecastData = document.createElement("div")
+            forecastData.classList.add("col-sm-2");
+
             const dailyDate = moment.unix(daily[i].dt).format("DD/MM/YYYY");
-            const dailyTemp = daily[i].temp.day;
-            const dailyHum = daily[i].humidity;
-            const dailyIcon = daily[i].weather[0].icon;
-            const dailyWind = daily[i].wind_speed;
+            const dailyTemp = daily[i].temp.day + "F";
+            const dailyHum = daily[i].humidity + "%";
+            const dailyWind = daily[i].wind_speed + " km/h";
+            const dailyIcon = $("<img>");
+            dailyIcon.attr("src", "https://openweathermap.org/img/w/" + daily[i].weather[0].icon + ".png" 
+            );
+            //const dailyIcon = daily[i].weather[0].icon;
+            forecastData.innerHTML= `
+            <div class="card">
+            <div class="card-body">
+              <span id="current-icon"${dailyIcon}></span>            
+              <h5 class="card-title forecast-date">${dailyDate}</h5>
+              <p>Temp: <span id="forecast-temp1">${dailyTemp}</span></p>
+              <p>Wind: <span id="forecast-wind1">${dailyWind}</span></p>
+              <p>Humidity: <span id="forecast-humidity1">${dailyHum}</span></p>
+            </div>
+          </div>
+            `
+
 
             console.log(dailyDate);
 
             //creates dynamic elements
-            $("forecast-date1").text(dailyDate[1]);
+           // $(".forecast-date").append(dailyDate);
 
 
             //adds text to dynamic elements
@@ -101,11 +124,10 @@ searchForm.addEventListener('submit', function(event){
             //$("#forecast-date").text(dailyDate);
 
             //const forecastDate = $('<h5 class="card-title forecast-date">')
-           //$("#current-temp").text(weatherData.current.temp + "F");
 
                 
             //})
-
+            document.querySelector("#weather-cards").appendChild(forecastData)
             
 
         }
