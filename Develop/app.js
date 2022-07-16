@@ -26,7 +26,7 @@ function getWeatherData(city){
     return fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`)
     .then(function(response){
         return response.json()
-        
+    
     })
     
     .then(function(currentWeather){
@@ -48,6 +48,8 @@ function getWeatherData(city){
         
         return getOneCallApi(currentWeather.coord.lon, currentWeather.coord.lat, currentWeather.dt, currentWeather.name)
     })
+
+
         
 
 }
@@ -98,9 +100,10 @@ searchForm.addEventListener('submit', function(event){
             //const dailyIcon = daily[i].weather[0].icon;
             forecastData.innerHTML= `
             <div class="card">
-            <div class="card-body">
-              <span id="current-icon"${dailyIcon}></span>            
+            <div class="card-body">            
               <h5 class="card-title forecast-date">${dailyDate}</h5>
+              <span id="current-icon"><img src=${
+                "https://openweathermap.org/img/w/" + daily[i].weather[0].icon + ".png" }></span>
               <p>Temp: <span id="forecast-temp1">${dailyTemp}</span></p>
               <p>Wind: <span id="forecast-wind1">${dailyWind}</span></p>
               <p>Humidity: <span id="forecast-humidity1">${dailyHum}</span></p>
@@ -128,21 +131,63 @@ searchForm.addEventListener('submit', function(event){
                 
             //})
             document.querySelector("#weather-cards").appendChild(forecastData)
-            
 
         }
 
-
+        citySearchList();
         
     })
     
-
-
-
-
+function citySearchList(){
+    cityHistory = localStorage.getItem("City Name")
+    console.log("City Name" + localStorage.getItem("City Name"));
+    
     //render the hiostory into the search list
+    if (cityHistory !== null) {
+        // alert("inside citySearchList");
+         const cityList = $("<button>");
+         cityList.addClass("list-group-item d-flex justify-content-between align-items-center");
+         cityList.text(cityHistory);
+         $("ul").prepend(cityList);
+         $(inputSearch).val("");
+       }
+     }
+
+     $("ul").on("click", "button", function () {
+        //alert("inside ul");
+        cityHistory = $(this).text();
+        console.log(cityHistory);
+      
+        getWeatherData(cityHistory);
+      })
+
+      $("#recent-city-list").on("click", "button", function (event) {
+        event.preventDefault();
+        const city = $(this).text();
+    
+        getWeatherData(city, cityHistory);
+    
+        $("#current-weather").show();
+        $("#forecast-weather").show();
+      });
+
+      if(getWeatherData.status == 404) {
+        alert("This is not a valid City");
+        return;
+      }
 
 })
+
+$("#clear-history").on("click", function (event) {
+    event.preventDefault();
+    cityList = [];
+    localStorage.removeItem("City Name");
+    document.location.reload();
+  });
+
+
+
+
 
 
 
