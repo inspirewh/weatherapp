@@ -77,9 +77,12 @@ searchForm.addEventListener('submit', function(event){
         $("#current-temp").text(weatherData.current.temp + "F");
         $("#current-humidity").text(weatherData.current.humidity + "%");
         $("#current-wind").text(weatherData.current.wind_speed + " km/h");
-        $("#current-uv").text(weatherData.current.uvi);
-
-        const uvIndex = $("#current-uv");
+        //$("#current-uv").text(weatherData.daily[0].uvi);
+        
+        const uvIndex = weatherData.daily[0].uvi;
+        const uvIndexBtn = $("<button>");
+        var bgColor;
+        
         if (uvIndex <= 3) {
             bgColor = "green";        
         }
@@ -94,8 +97,9 @@ searchForm.addEventListener('submit', function(event){
             bgColor = "red";
           }
 
-          uvIndex.addClass("btn btn-custom");
-          uvIndex.attr("style", ("background-color:" + bgColor));
+          uvIndexBtn.addClass("btn btn-custom");
+          uvIndexBtn.attr("style", ("background-color:" + bgColor));
+          $("#current-uv").append(uvIndexBtn).text(weatherData.daily[0].uvi);
 
         //show weather per day - 5 day forecast for the search city
         //loop through the daily response array
