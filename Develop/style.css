@@ -1,4 +1,34 @@
+#weather-header{
+    padding: 5px;
+}
+.nav-header{
+    background-image: linear-gradient(to right, rgb(0, 112, 186), rgb(24, 0, 109));
+}
+
 body {
     font-family:Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-weight: 400;
 }
+
+.btn-default {
+    background-color: rgb(0, 112, 186);
+    color: white;
+}
+
+.forecast-cards {
+    background-color: rgb(43, 43, 43);
+}
+
+#weather-cards{
+    color: white;
+}
+
+.row{
+    margin-top: 10px
+}
+
+.h2, h2{
+    padding-left: 15px;
+    padding-top: 15px;
+}
+

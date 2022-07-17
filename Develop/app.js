@@ -79,6 +79,24 @@ searchForm.addEventListener('submit', function(event){
         $("#current-wind").text(weatherData.current.wind_speed + " km/h");
         $("#current-uv").text(weatherData.current.uvi);
 
+        const uvIndex = $("#current-uv");
+        if (uvIndex <= 3) {
+            bgColor = "green";        
+        }
+
+        else if (uvIndex > 3 && uvIndex <= 6) {
+            bgColor = "yellow";
+          }
+          else if (uvIndex > 6 && uvIndex <= 9) {
+            bgColor = "orange";
+          }
+          else {
+            bgColor = "red";
+          }
+
+          uvIndex.addClass("btn btn-custom");
+          uvIndex.attr("style", ("background-color:" + bgColor));
+
         //show weather per day - 5 day forecast for the search city
         //loop through the daily response array
 
@@ -100,7 +118,7 @@ searchForm.addEventListener('submit', function(event){
             //const dailyIcon = daily[i].weather[0].icon;
             forecastData.innerHTML= `
             <div class="card">
-            <div class="card-body">            
+            <div class="card-body forecast-cards">            
               <h5 class="card-title forecast-date">${dailyDate}</h5>
               <span id="current-icon"><img src=${
                 "https://openweathermap.org/img/w/" + daily[i].weather[0].icon + ".png" }></span>

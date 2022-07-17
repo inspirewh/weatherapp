@@ -13,32 +13,32 @@
 <body>
 
   <!-- nav bar -->
-  <nav class="nav d-flex justify-content-center bg-dark text-white">
-    <h1> Weather Dashboard </h1>
+  <nav class="nav d-flex justify-content-center text-white nav-header">
+    <h1 id="weather-header"> Weather Dashboard </h1>
   </nav>
 
   <!-- container -->
   <!-- Equal width cols, same on all screen sizes -->
   <!-- <section class="container"> -->
   <!-- main row -->
-  <section class="row">
+  <section class="row row1">
     <!-- search bar column - 3 grids -->
     <!-- search bar col -->
     <div class="col-12 col-sm-3">
       <form id="search-form">
         <div class="form-group">
-          <div class="card custom-card">
-          <h3 class="card-header">Search for a City:</h3>
+          <div class="card custom-card border-0">
+          <h3 class="card-header bg-white border-0">Search for a City:</h3>
           <div class="card-body">
           <input type="text" class="form-control" id="input-search" placeholder="City">
           </div>
         </div>
         <div class="card-body">
-          <button class="btn btn-info btn-block submit">Search</button>
+          <button class="btn btn-info btn-block btn-default submit">Search</button>
         </div>
       </form>
       <!-- list of previous searches (stored in local storeage) -->
-      <div class="card-footer">
+      <div class="card-footer bg-white">
         <p>Recent Searches</p>
         <ul id= "recent-city-list" class="list-group"></ul>
         <div class="d-grid gap-2">
