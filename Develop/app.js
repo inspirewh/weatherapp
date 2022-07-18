@@ -80,9 +80,9 @@ searchForm.addEventListener('submit', function(event){
         //$("#current-uv").text(weatherData.daily[0].uvi);
         
         const uvIndex = weatherData.daily[0].uvi;
-        const uvIndexBtn = $("<button>");
+        const uvIndexBtn = $("#current-uv");
         var bgColor;
-        
+
         if (uvIndex <= 3) {
             bgColor = "green";        
         }
@@ -175,7 +175,7 @@ function citySearchList(){
        }
      }
 
-     $("ul").on("click", "button", function () {
+     $("recent-city-list").on("click", "button", function () {
         //alert("inside ul");
         cityHistory = $(this).text();
         console.log(cityHistory);
