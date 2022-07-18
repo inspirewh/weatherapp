@@ -175,13 +175,13 @@ function citySearchList(){
        }
      }
 
-     $("ul").on("click", "button", function () {
+    // $("ul").on("click", "button", function () {
         //alert("inside ul");
-        cityHistory = $(this).text();
-        console.log(cityHistory);
+        //cityHistory = $(this).text();
+      //  console.log(cityHistory);
       
-        getWeatherData(cityHistory);
-      })
+      //  getWeatherData(cityHistory);
+     // })
 
       $("#recent-city-list").on("click", "button", function (event) {
         event.preventDefault();
@@ -189,8 +189,10 @@ function citySearchList(){
     
         getWeatherData(city);
     
-        $("#current-weather").show();
-        $("#forecast-weather").show();
+        //$("#current-weather").show();
+       // $("#forecast-weather").show();
+
+
       });
 
       if(getWeatherData.status == 404) {
