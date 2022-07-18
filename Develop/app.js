@@ -32,7 +32,6 @@ function getWeatherData(city){
     .then(function(currentWeather){
         const cityName = $("#city-name").text(currentWeather.name);
         const datetime = moment(currentWeather.dt, 'X').format("DD-MM-YYYY");
-        console.log(datetime);
         const weatherIcon = $("<img>");
         weatherIcon.attr("src", "https://openweathermap.org/img/w/" + currentWeather.weather[0].icon + ".png" 
         );
@@ -135,6 +134,7 @@ searchForm.addEventListener('submit', function(event){
 
 
             console.log(dailyDate);
+            
 
             //creates dynamic elements
            // $(".forecast-date").append(dailyDate);
@@ -175,7 +175,7 @@ function citySearchList(){
        }
      }
 
-     $("recent-city-list").on("click", "button", function () {
+     $("ul").on("click", "button", function () {
         //alert("inside ul");
         cityHistory = $(this).text();
         console.log(cityHistory);
@@ -187,7 +187,7 @@ function citySearchList(){
         event.preventDefault();
         const city = $(this).text();
     
-        getWeatherData(city, cityHistory);
+        getWeatherData(city);
     
         $("#current-weather").show();
         $("#forecast-weather").show();
