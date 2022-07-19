@@ -189,8 +189,8 @@ function citySearchList(){
     
         getWeatherData(city);
     
-        //$("#current-weather").show();
-       // $("#forecast-weather").show();
+        $("#current-weather").show();
+        $("#forecast-weather").show();
 
 
       });
