@@ -25,6 +25,13 @@ function getWeatherData(city){
     
     return fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`)
     .then(function(response){
+      $("#error-alert").empty();
+
+      if(response.status == 404) {
+        $("#error-alert").text("Error: This is not a valid City");
+        //alert("This is not a valid City");
+        return;
+      }
         return response.json()
     
     })
@@ -187,18 +194,115 @@ function citySearchList(){
         event.preventDefault();
         const city = $(this).text();
     
-        getWeatherData(city);
+        getWeatherData(city)
+
+        .then(function(weatherData){
+          console.log(weatherData);
+          
+          //const weatherIcon = $("<img>");
+          //weatherIcon.attr("src", "https://openweathermap.org/img/w/" + weatherData.current.weather[0].icon + ".png" 
+          //);
+          //once we have the data
+          //populate the data into the DOM
+          //current card: city name, date icon
+          $("#current-icon").empty();
+          //$("#current-icon").append(weatherIcon);
+  
+          $("#current-temp").text(weatherData.current.temp + "F");
+          $("#current-humidity").text(weatherData.current.humidity + "%");
+          $("#current-wind").text(weatherData.current.wind_speed + " km/h");
+          //$("#current-uv").text(weatherData.daily[0].uvi);
+          
+          const uvIndex = weatherData.daily[0].uvi;
+          const uvIndexBtn = $("#current-uv");
+          var bgColor;
+  
+          if (uvIndex <= 3) {
+              bgColor = "green";        
+          }
+  
+          else if (uvIndex > 3 && uvIndex <= 6) {
+              bgColor = "yellow";
+            }
+            else if (uvIndex > 6 && uvIndex <= 9) {
+              bgColor = "orange";
+            }
+            else {
+              bgColor = "red";
+            }
+  
+            uvIndexBtn.addClass("btn btn-custom");
+            uvIndexBtn.attr("style", ("background-color:" + bgColor));
+            $("#current-uv").append(uvIndexBtn).text(weatherData.daily[0].uvi);
+  
+          //show weather per day - 5 day forecast for the search city
+          //loop through the daily response array
+  
+          const daily = weatherData.daily;
+          console.log(daily);
+          $("#weather-cards").empty();
+  
+          for (i = 1; i < 6; i++) {
+              const forecastData = document.createElement("div")
+              forecastData.classList.add("col-sm-2");
+  
+              const dailyDate = moment.unix(daily[i].dt).format("DD/MM/YYYY");
+              const dailyTemp = daily[i].temp.day + "F";
+              const dailyHum = daily[i].humidity + "%";
+              const dailyWind = daily[i].wind_speed + " km/h";
+              const dailyIcon = $("<img>");
+              dailyIcon.attr("src", "https://openweathermap.org/img/w/" + daily[i].weather[0].icon + ".png" 
+              );
+              //const dailyIcon = daily[i].weather[0].icon;
+              forecastData.innerHTML= `
+              <div class="card">
+              <div class="card-body forecast-cards">            
+                <h5 class="card-title forecast-date">${dailyDate}</h5>
+                <span id="current-icon"><img src=${
+                  "https://openweathermap.org/img/w/" + daily[i].weather[0].icon + ".png" }></span>
+                <p>Temp: <span id="forecast-temp1">${dailyTemp}</span></p>
+                <p>Wind: <span id="forecast-wind1">${dailyWind}</span></p>
+                <p>Humidity: <span id="forecast-humidity1">${dailyHum}</span></p>
+              </div>
+            </div>
+              `
+  
+  
+              console.log(dailyDate);
+              
+  
+              //creates dynamic elements
+             // $(".forecast-date").append(dailyDate);
+  
+  
+              //adds text to dynamic elements
+             //dateTag.text(dailyDate);
+  
+  
+  
+  
+              //$("#forecast-date").text(dailyDate);
+  
+              //const forecastDate = $('<h5 class="card-title forecast-date">')
+  
+                  
+              //})
+              document.querySelector("#weather-cards").appendChild(forecastData)
+  
+          }
+
+          
+      })
     
         $("#current-weather").show();
         $("#forecast-weather").show();
 
 
       });
+    
+      //console.log(getWeatherData.status)
 
-      if(getWeatherData.status == 404) {
-        alert("This is not a valid City");
-        return;
-      }
+
 
 })
 
